@@ -7,6 +7,9 @@ import Error from '../ErrorPage/Error'
 import AddApplication from '../AddApplication/AddApplication'
 import ApplicationDetails from '../ApplicationDetails/ApplicationDetails'
 import ApplicationEdit from '../ApplicationEdit/ApplicationEdit'
+import AuthLayout from '../AuthLayout/AuthLayout'
+import Register from '../AuthLayout/Register'
+import Login from '../AuthLayout/Login'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,20 @@ const router = createBrowserRouter([
       {
         path: '/applications/:id/edit',
         Component: ApplicationEdit,
+      },
+    ],
+  },
+  {
+    path: 'auth',
+    Component: AuthLayout,
+    children: [
+      {
+        path: '/auth/register',
+        Component: Register,
+      },
+      {
+        path: '/auth/login',
+        Component: Login,
       },
     ],
   },

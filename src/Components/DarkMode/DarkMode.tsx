@@ -44,7 +44,7 @@ const DarkMode = () => {
       aria-label={
         theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
       }
-      className="flex items-center justify-center w-9 h-9 rounded-lg border border-border bg-card text-foreground hover:bg-accent/10 hover:text-accent transition-colors cursor-pointer"
+      className="flex items-center justify-center w-9 h-9 rounded-xl border border-border bg-card text-foreground hover:bg-accent/10 hover:text-accent transition-colors cursor-pointer"
     >
       {theme === 'dark' ? (
         <IoSunnyOutline className="text-lg" />

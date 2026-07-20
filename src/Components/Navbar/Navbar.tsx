@@ -44,7 +44,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <DarkMode />
           <Link
-            to="/register"
+            to="/auth/register"
             className="hidden sm:inline-flex items-center justify-center gap-2 px-3 lg:px-4 py-1.5 bg-bg text-foreground border border-border text-xs lg:text-sm font-semibold rounded-sm shadow-sm hover:bg-primary-soft hover:border-primary transition-all duration-200 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background whitespace-nowrap"
           >
             <span>Sign in</span>
