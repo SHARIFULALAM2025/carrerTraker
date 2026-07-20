@@ -1,11 +1,9 @@
-import React from 'react';
-
 const dashboard = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+  return (
+    <div>
+      <h1 className="">application</h1>
+    </div>
+  )
+}
 
-export default dashboard;
+export default dashboard

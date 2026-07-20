@@ -1,11 +1,9 @@
-import React from 'react';
-
 const Application = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+  return (
+    <div>
+      <h1 className="">application</h1>
+    </div>
+  )
+}
 
-export default Application;
+export default Application
