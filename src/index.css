@@ -1,0 +1,409 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark *));
+
+
+
+@theme {
+  --color-bg: #F4F8FC;
+  --color-surface: #FFFFFF;
+  --color-navy: #0F2C4E;
+
+  --color-primary: #0058C8;
+  --color-primary-hover: #00408F;
+  --color-primary-soft: #E3EFFC;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-accent: #00A0F0;
+  --color-accent-soft: #E0F4FE;
+  --color-accent-foreground: #FFFFFF;
+
+  --color-success: #2F9E44;
+  --color-success-soft: #E7F6EA;
+
+  --color-warning: #C98A15;
+  --color-warning-soft: #FBF1DF;
+
+  --color-danger: #C1443C;
+  --color-danger-soft: #FBEAE8;
+  --color-danger-foreground: #FFFFFF;
+
+  --color-text: #10233B;
+  --color-text-muted: #5C6E82;
+  --color-border: #DCE6F0;
+
+  /* ---- Shadcn/Tailwind-style aliases — SAME tokens, no new source of truth ---- */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text);
+  --color-muted: var(--color-text-muted);
+  --color-muted-foreground: var(--color-text-muted);
+  --color-destructive: var(--color-danger);
+  --color-destructive-foreground: var(--color-danger-foreground);
+
+  /* ---- Application status → color ---- */
+  --color-status-saved: var(--color-text-muted);
+  --color-status-applied: var(--color-primary);
+  --color-status-assessment: var(--color-warning);
+  --color-status-interview: var(--color-accent);
+  --color-status-rejected: var(--color-danger);
+  --color-status-offer: var(--color-success);
+
+  --font-display: "Poppins", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 44, 78, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 44, 78, 0.10);
+}
+
+/* ---- Dark mode — শুধু উপরের একই টোকেনগুলোর মান বদলাচ্ছে, নতুন
+   কোনো নাম বা alias তৈরি করছে না, তাই লুপ হওয়ার সুযোগ নেই ---- */
+.dark {
+  --color-bg: #0B1420;
+  --color-surface: #101B2D;
+  --color-navy: #E8EEF7;
+
+  --color-primary: #3B82F6;
+  --color-primary-hover: #60A5FA;
+  --color-primary-soft: rgba(59, 130, 246, 0.16);
+  --color-primary-foreground: #FFFFFF;
+
+  --color-accent: #38BDF8;
+  --color-accent-soft: rgba(56, 189, 248, 0.16);
+  --color-accent-foreground: #06101F;
+
+  --color-success: #4ADE80;
+  --color-success-soft: rgba(74, 222, 128, 0.14);
+
+  --color-warning: #FBBF24;
+  --color-warning-soft: rgba(251, 191, 36, 0.14);
+
+  --color-danger: #F87171;
+  --color-danger-soft: rgba(248, 113, 113, 0.14);
+  --color-danger-foreground: #1A0505;
+
+  --color-text: #E5EDF7;
+  --color-text-muted: #93A4BB;
+  --color-border: #22314A;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+/* ---------- Logo-style brand mark (nav/header এ ব্যবহার করুন) ---------- */
+.brand-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-navy);
+}
+.brand-mark .brand-mark-accent {
+  color: var(--color-accent);
+}
+
+/* ---------- Layout helpers ---------- */
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--color-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-card .eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.auth-card h1 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.auth-card .subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.form-field input, .form-field textarea, .form-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color 0.15s ease;
+}
+
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.form-error {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 9px 16px;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary-soft);
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.auth-switch a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Status badge ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--badge-color) 14%, var(--color-surface));
+  color: var(--badge-color);
+}
+
+.badge[data-status="Saved"] { --badge-color: var(--color-status-saved); }
+.badge[data-status="Applied"] { --badge-color: var(--color-status-applied); }
+.badge[data-status="Assessment"] { --badge-color: var(--color-status-assessment); }
+.badge[data-status="Interview"] { --badge-color: var(--color-status-interview); }
+.badge[data-status="Rejected"] { --badge-color: var(--color-status-rejected); }
+.badge[data-status="Offer"] { --badge-color: var(--color-status-offer); }
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- 404 Not Found page ---------- */
+.notfound-shell {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--color-bg);
+}
+
+.notfound-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+}
+
+.notfound-blob--primary {
+  top: 18%;
+  left: 12%;
+  width: 220px;
+  height: 220px;
+  background: var(--color-primary-soft);
+}
+
+.notfound-blob--accent {
+  bottom: 12%;
+  right: 12%;
+  width: 260px;
+  height: 260px;
+  background: var(--color-accent-soft);
+}
+
+.notfound-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 460px;
+}
+
+.notfound-code {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-navy);
+  margin-bottom: 8px;
+}
+
+.notfound-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.notfound-divider-line {
+  height: 1px;
+  flex: 1;
+  background: var(--color-border);
+}
+
+.notfound-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.notfound-heading {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.notfound-desc {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.notfound-actions .btn-primary,
+.notfound-actions .btn-secondary {
+  width: auto;
+  padding: 12px 28px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
