@@ -126,7 +126,7 @@ const MyApplication = () => {
         </h1>
         <Link
           to="/applications/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-md shadow-sm hover:opacity-90 transition"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-foreground text-sm font-semibold rounded-md shadow-sm hover:opacity-90 transition"
         >
           <FaPlus className="text-xs" />
           Add Application

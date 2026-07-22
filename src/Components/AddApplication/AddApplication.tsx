@@ -169,7 +169,7 @@ const AddApplication = () => {
                     Select source
                   </option>
                   {sourceOptions.map((src) => (
-                    <option key={src} value={src} className='text-black'>
+                    <option key={src} value={src} className="text-black">
                       {src}
                     </option>
                   ))}
@@ -191,7 +191,7 @@ const AddApplication = () => {
                 className="w-full border border-border bg-transparent text-foreground px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 {statusOptions.map((s) => (
-                  <option key={s} value={s}>
+                  <option key={s} value={s} className="text-black">
                     {s}
                   </option>
                 ))}
