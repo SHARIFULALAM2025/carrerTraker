@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { LuGithub, LuLinkedin, LuMail, LuMapPin } from 'react-icons/lu'
 import { navItem } from '../Navbar/data'
+import { useAuth } from '../lib/useAuth'
 
 const Footer = () => {
   const year = new Date().getFullYear()
+  const { user } = useAuth()
 
   return (
     <footer className="bg-background border-t border-border">
@@ -33,16 +35,19 @@ const Footer = () => {
               Navigate
             </h3>
             <ul className="flex flex-col gap-2">
-              {navItem.map((item) => (
-                <li key={item.id}>
-                  <Link
-                    to={item.path}
-                    className="text-sm text-muted hover:text-accent transition-colors"
-                  >
-                    {item.Name}
-                  </Link>
-                </li>
-              ))}
+              {navItem.map((item) => {
+                const destination = item.protected && !user ? '/auth/register' : item.path
+                return (
+                  <li key={item.id}>
+                    <Link
+                      to={destination}
+                      className="text-sm text-muted hover:text-accent transition-colors"
+                    >
+                      {item.Name}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 
@@ -88,7 +93,7 @@ const Footer = () => {
             </ul>
             <div className="flex items-center gap-3">
 
-               <a href="https://github.com/"
+              <a  href="https://github.com/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
@@ -97,7 +102,7 @@ const Footer = () => {
                 <LuGithub className="text-base" />
               </a>
 
-                <a href="https://linkedin.com/"
+               <a href="https://linkedin.com/"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
@@ -113,9 +118,8 @@ const Footer = () => {
           <p className="text-xs text-muted">
             © {year} CareerTrack Lite. All rights reserved.
           </p>
-          {/* TODO: জমা দেওয়ার আগে আপনার নাম আর স্টুডেন্ট আইডি বসান */}
           <p className="text-xs text-muted">
-           shariful alam · Student ID:WEB-2644
+            Shariful Alam · Student ID: WEB12-2644
           </p>
         </div>
       </div>
