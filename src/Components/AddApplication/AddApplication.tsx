@@ -169,7 +169,7 @@ const AddApplication = () => {
                     Select source
                   </option>
                   {sourceOptions.map((src) => (
-                    <option key={src} value={src}>
+                    <option key={src} value={src} className='text-black'>
                       {src}
                     </option>
                   ))}
