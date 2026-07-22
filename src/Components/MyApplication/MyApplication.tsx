@@ -126,9 +126,9 @@ const MyApplication = () => {
         </h1>
         <Link
           to="/applications/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-foreground text-sm font-semibold rounded-md shadow-sm hover:opacity-90 transition"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-foreground text-sm font-semibold rounded-md shadow-sm "
         >
-          <FaPlus className="text-xs" />
+          <FaPlus className="text-xs text-foreground " />
           Add Application
         </Link>
       </div>
@@ -199,7 +199,7 @@ const MyApplication = () => {
 
       {!isLoading && !error && applications.length === 0 && (
         <div className="text-center py-16 border border-dashed border-border rounded-lg">
-        <NotFound/>
+          <NotFound />
           <Link
             to="/applications/new"
             className="text-accent font-semibold hover:underline"
