@@ -68,7 +68,7 @@ const ApplicationDetails = () => {
         icon: 'success',
         ...swalTheme,
       })
-      navigate('/applications')
+      navigate('/')
     } catch (err) {
       const message = getErrorMessage(err, 'Failed to delete application')
       setError(message)
