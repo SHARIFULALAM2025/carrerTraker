@@ -162,7 +162,7 @@ const AddApplication = () => {
                 <FaGlobe className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
                 <select
                   {...register('source', { required: 'Source is required' })}
-                  className="w-full border border-border bg-card-foreground text-background  pl-10 pr-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
+                  className="w-full border border-border bg-transparent text-foreground pl-10 pr-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -188,7 +188,7 @@ const AddApplication = () => {
               </label>
               <select
                 {...register('status', { required: 'Status is required' })}
-                className="w-full border border-border bg-card-foreground text-background px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-full border border-border bg-transparent text-foreground px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 {statusOptions.map((s) => (
                   <option key={s} value={s}>
