@@ -27,7 +27,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors },
   } = useForm<RegisterFormData>()
 
@@ -41,7 +41,7 @@ const Register = () => {
       const image = await uploadImage(imageUrl)
 
       await registerUser(data.name, data.email, data.password, image)
-      fireSuccessToast("Register successfully")
+      fireSuccessToast('Register successfully')
       navigate('/dashboard')
     } catch (err) {
       setServerError(
@@ -178,7 +178,8 @@ const Register = () => {
                   {...register('confirmPassword', {
                     required: 'Confirm Password is required!',
                     validate: (value) =>
-                      value === watch('password') || 'Passwords do not match',
+                      value === getValues('password') ||
+                      'Passwords do not match',
                   })}
                   type={eye ? 'text' : 'password'}
                   placeholder="Confirm Password"
@@ -198,6 +199,7 @@ const Register = () => {
               )}
             </div>
           </div>
+
           <div>
             <label className="block text-sm font-semibold text-foreground mb-1">
               Profile <span className="text-danger">*</span>
@@ -218,6 +220,7 @@ const Register = () => {
               </span>
             )}
           </div>
+
           <button
             type="submit"
             disabled={isSubmitting}

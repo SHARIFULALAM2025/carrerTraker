@@ -6,14 +6,16 @@ import { loginRequest, meRequest, registerRequest } from '../../api/auth'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+
+
+  const [isLoading, setIsLoading] = useState(() =>
+    Boolean(localStorage.getItem('token'))
+  )
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (!token) {
-      setIsLoading(false)
-      return
-    }
+   
+    if (!token) return
 
     meRequest()
       .then((currentUser) => setUser(currentUser))
