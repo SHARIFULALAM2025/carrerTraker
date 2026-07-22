@@ -1,6 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-const NotFound = () => {
+interface NotFoundProps {
+  title?: string
+  description?: string
+  showGoBack?: boolean
+}
+
+const NotFound = ({
+  title = 'Data not found',
+  description = "We couldn't find what you were looking for. It may have been removed, or you might not have access to it.",
+  showGoBack = true,
+}: NotFoundProps) => {
   const navigate = useNavigate()
 
   return (
@@ -17,20 +27,18 @@ const NotFound = () => {
           <span className="notfound-divider-line" />
         </div>
 
-        <h1 className="notfound-heading">Page not found</h1>
-        <p className="notfound-desc">
-          The page you&apos;re looking for doesn&apos;t exist or may have been
-          moved. Head back to your dashboard or the homepage to keep tracking
-          your job applications.
-        </p>
+        <h1 className="notfound-heading">{title}</h1>
+        <p className="notfound-desc">{description}</p>
 
         <div className="notfound-actions">
           <Link to="/" className="btn-primary">
             Go to Homepage
           </Link>
-          <button onClick={() => navigate(-1)} className="btn-secondary">
-            Go Back
-          </button>
+          {showGoBack && (
+            <button onClick={() => navigate(-1)} className="btn-secondary">
+              Go Back
+            </button>
+          )}
         </div>
       </div>
     </div>
