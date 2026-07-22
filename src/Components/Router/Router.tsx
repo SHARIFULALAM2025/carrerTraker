@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import RootLayout from '../RootLayout/RootLayout'
 import Home from '../Home/Home'
 import dashboard from '../Dashboard/dashboard'
-import Application from '../Application/Application'
+
 import Error from '../ErrorPage/Error'
 import AddApplication from '../AddApplication/AddApplication'
 import ApplicationDetails from '../ApplicationDetails/ApplicationDetails'
@@ -10,6 +10,8 @@ import ApplicationEdit from '../ApplicationEdit/ApplicationEdit'
 import AuthLayout from '../AuthLayout/AuthLayout'
 import Register from '../AuthLayout/Register'
 import Login from '../AuthLayout/Login'
+import MyApplication from '../MyApplication/MyApplication'
+import AllApplication from '../AllApplication/AllApplication'
 
 const router = createBrowserRouter([
   {
@@ -20,14 +22,17 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      }, {
+        path: "/AllApplication",
+        Component:AllApplication
       },
       {
         path: '/dashboard',
         Component: dashboard,
       },
       {
-        path: '/application',
-        Component: Application,
+        path: '/myApplication',
+        Component: MyApplication,
       },
       {
         path: '/applications/new',

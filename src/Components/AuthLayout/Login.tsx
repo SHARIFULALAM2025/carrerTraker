@@ -3,6 +3,7 @@ import { FaEnvelope, FaLock, FaEyeSlash, FaEye } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../lib/useAuth'
+import { fireSuccessToast } from '../lib/swal'
 
 interface LoginFormData {
   email: string
@@ -32,6 +33,7 @@ const Login = () => {
     try {
       await login(data.email, data.password)
       navigate('/dashboard')
+      fireSuccessToast("Login successfully!")
     } catch (err: unknown) {
       let errorMessage = 'Login failed. Please try again.'
 

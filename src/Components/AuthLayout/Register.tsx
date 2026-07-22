@@ -4,12 +4,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../lib/useAuth'
 import { CgProfile } from 'react-icons/cg'
+import { uploadImage } from '../lib/UploadIamge'
+import { getErrorMessage } from '../lib/getErrorMessage'
+import { fireSuccessToast } from '../lib/swal'
 
 interface RegisterFormData {
   name: string
   email: string
-    password: string
-    image:string
+  password: string
+  image: FileList
   confirmPassword: string
 }
 
@@ -34,11 +37,15 @@ const Register = () => {
     setServerError(null)
     setIsSubmitting(true)
     try {
-      await registerUser(data.name, data.email, data.password)
+      const imageUrl = data.image[0]
+      const image = await uploadImage(imageUrl)
+
+      await registerUser(data.name, data.email, data.password, image)
+      fireSuccessToast("Register successfully")
       navigate('/dashboard')
-    } catch (err: any) {
+    } catch (err) {
       setServerError(
-        err.response?.data?.error || 'Registration failed. Please try again.'
+        getErrorMessage(err, 'Registration failed. Please try again.')
       )
     } finally {
       setIsSubmitting(false)

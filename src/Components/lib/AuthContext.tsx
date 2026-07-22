@@ -1,43 +1,60 @@
-import { useMemo, type ReactNode } from 'react'
+import { useState, useEffect, type ReactNode } from 'react'
+import type { User } from '../../types/index'
 
-//import { AuthContext, type AuthContextValue } from './AuthContextInstance'
-import { authClient } from './Authclient'
-import { AuthContext, type AuthContextValue } from './Authcontextinstance'
+import { AuthContext, type AuthContextValue } from './AuthContextInstance'
+import { loginRequest, meRequest, registerRequest } from '../../api/auth'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // better-auth এর নিজস্ব রিয়্যাক্টিভ সেশন হুক — session বদলালে
-  // (login/logout/expire) স্বয়ংক্রিয়ভাবে রি-রেন্ডার করবে
-  const { data: session, isPending } = authClient.useSession()
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const register = async (name: string, email: string, password: string) => {
-    const { error } = await authClient.signUp.email({ name, email, password })
-    if (error) {
-      throw new Error(error.message || 'Registration failed. Please try again.')
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      setIsLoading(false)
+      return
     }
+
+    meRequest()
+      .then((currentUser) => setUser(currentUser))
+      .catch(() => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
+
+  async function login(email: string, password: string) {
+    const { user: loggedInUser, token } = await loginRequest(email, password)
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(loggedInUser))
+    setUser(loggedInUser)
   }
 
-  const login = async (email: string, password: string) => {
-    const { error } = await authClient.signIn.email({ email, password })
-    if (error) {
-      throw new Error(error.message || 'Login failed. Please try again.')
-    }
+  async function register(
+    name: string,
+    email: string,
+    password: string,
+    image?: string
+  ) {
+    const { user: newUser, token } = await registerRequest(
+      name,
+      email,
+      password,
+      image
+    )
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(newUser))
+    setUser(newUser)
   }
 
-  const logout = async () => {
-    await authClient.signOut()
+  function logout() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    setUser(null)
   }
 
-  const value = useMemo<AuthContextValue>(
-    () => ({
-      user: session?.user ?? null,
-      isPending,
-      register,
-      login,
-      logout,
-    }),
-
-    [session, isPending]
-  )
+  const value: AuthContextValue = { user, isLoading, login, register, logout }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
