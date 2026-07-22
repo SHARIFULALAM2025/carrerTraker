@@ -1,9 +1,14 @@
+import Features from "../Hero/Features/Features";
+import Hero from "../Hero/Hero";
+import Testimonials from "../Hero/Testimonials";
 
 
 const Home = () => {
     return (
         <div>
-            <h6 className="">home</h6>
+            <Hero />
+            <Features />
+            <Testimonials/>
         </div>
     );
 };
