@@ -61,21 +61,25 @@ export default function Dashboard() {
           <h1 className="font-display text-2xl font-bold text-foreground">
             Welcome back, {user?.name?.split(' ')[0]}
           </h1>
-          <p className="text-muted text-sm mt-1">Here's how your job search is going.</p>
+          <p className="text-muted text-sm mt-1">
+            Here's how your job search is going.
+          </p>
         </div>
         <Link
           to="/applications/new"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm font-semibold rounded-md shadow-sm hover:opacity-90 transition"
+          className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-md text-sm bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
         >
           <FaPlus className="text-xs" />
           Add Application
         </Link>
       </div>
 
-      {isLoading && <Loading/>}
+      {isLoading && <Loading />}
 
       {!isLoading && error && (
-        <div className="bg-danger-soft text-danger text-sm rounded-md px-4 py-3">{error}</div>
+        <div className="bg-danger-soft text-danger text-sm rounded-md px-4 py-3">
+          {error}
+        </div>
       )}
 
       {!isLoading && !error && data && (
@@ -85,7 +89,7 @@ export default function Dashboard() {
             {statCardOrder.map(({ key, label }) => (
               <div key={key} className="card text-center">
                 <p className="text-2xl font-display font-bold text-foreground">
-                  {key === 'total' ? data.total : data.statusCounts[key] ?? 0}
+                  {key === 'total' ? data.total : (data.statusCounts[key] ?? 0)}
                 </p>
                 <p className="text-xs text-muted mt-1">{label}</p>
               </div>
@@ -94,16 +98,24 @@ export default function Dashboard() {
 
           {/* Recent applications */}
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-display font-semibold text-lg text-foreground">Recent Applications</h2>
-            <Link to="/applications" className="text-sm text-accent font-semibold hover:underline">
+            <h2 className="font-display font-semibold text-lg text-foreground">
+              Recent Applications
+            </h2>
+            <Link
+              to="/applications"
+              className="text-sm text-accent font-semibold hover:underline"
+            >
               View all
             </Link>
           </div>
 
           {data.recent.length === 0 ? (
             <div className="text-center py-16 border border-dashed border-border rounded-lg">
-              <NotFound/>
-              <Link to="/applications/new" className="text-accent font-semibold hover:underline">
+              <NotFound />
+              <Link
+                to="/applications/new"
+                className="text-accent font-semibold hover:underline"
+              >
                 Add your first application
               </Link>
             </div>
@@ -123,13 +135,17 @@ export default function Dashboard() {
                         {app.status}
                       </span>
                     </div>
-                    <p className="text-sm text-muted truncate">{app.jobTitle}</p>
+                    <p className="text-sm text-muted truncate">
+                      {app.jobTitle}
+                    </p>
                     <div className="flex items-center gap-3 mt-1 text-xs text-muted">
-                      <span>{new Date(app.applicationDate).toLocaleDateString()}</span>
+                      <span>
+                        {new Date(app.applicationDate).toLocaleDateString()}
+                      </span>
                       <span>•</span>
                       <span>{app.source}</span>
-                      {app.jobUrl && (<a
-
+                      {app.jobUrl && (
+                        <a
                           href={app.jobUrl}
                           target="_blank"
                           rel="noreferrer"

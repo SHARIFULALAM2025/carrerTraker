@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import { apiClient } from '../../api/client'
 import Loading from '../Loader/Loading'
 import type { Application } from '../Type/Application'
 import { getErrorMessage } from '../lib/getErrorMessage'
 import NotFound from '../NotFound/NotFound'
-
 
 const ApplicationsList = () => {
   const [applications, setApplications] = useState<Application[]>([])
@@ -30,6 +30,21 @@ const ApplicationsList = () => {
   if (loading) return <Loading />
   if (error) return <div className="text-danger text-center py-10">{error}</div>
 
+
+  if (applications.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center text-center py-20 px-4">
+        <NotFound />
+        <Link
+          to="/applications/new"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-md hover:opacity-90 transition"
+        >
+          Add your first application
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {applications.map((app) => (
@@ -38,7 +53,9 @@ const ApplicationsList = () => {
           key={app.id}
           className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition cursor-pointer"
         >
-          <h3 className="font-semibold text-lg">{app.jobTitle}</h3>
+          <h3 className="font-semibold text-lg text-foreground">
+            {app.jobTitle}
+          </h3>
           <p className="text-muted mt-1">{app.companyName}</p>
 
           <div className="mt-4 flex justify-between items-center">
@@ -51,10 +68,6 @@ const ApplicationsList = () => {
           </div>
         </Link>
       ))}
-
-      {applications.length === 0 && (
-        <NotFound/>
-      )}
     </div>
   )
 }
