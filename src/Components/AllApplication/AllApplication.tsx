@@ -4,6 +4,7 @@ import { apiClient } from '../../api/client'
 import Loading from '../Loader/Loading'
 import type { Application } from '../Type/Application'
 import { getErrorMessage } from '../lib/getErrorMessage'
+import NotFound from '../NotFound/NotFound'
 
 
 const ApplicationsList = () => {
@@ -52,9 +53,7 @@ const ApplicationsList = () => {
       ))}
 
       {applications.length === 0 && (
-        <p className="text-center text-muted col-span-full py-10">
-          No applications yet. Add your first one!
-        </p>
+        <NotFound/>
       )}
     </div>
   )

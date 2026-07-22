@@ -6,6 +6,7 @@ import Loading from '../Loader/Loading'
 import { getErrorMessage } from '../lib/getErrorMessage'
 import Swal from 'sweetalert2'
 import { swalDangerTheme, swalTheme } from '../lib/swal'
+import NotFound from '../NotFound/NotFound'
 
 
 interface Application {
@@ -83,7 +84,7 @@ const ApplicationDetails = () => {
   if (loading) return <Loading />
   if (error) return <div className="text-danger text-center py-10">{error}</div>
   if (!application)
-    return <div className="text-center py-10">Application not found</div>
+    return <NotFound/>
 
   return (
     <div className="max-w-3xl mx-auto p-6">

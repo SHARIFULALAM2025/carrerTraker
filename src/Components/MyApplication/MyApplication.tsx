@@ -12,6 +12,7 @@ import Loading from '../Loader/Loading'
 import { getErrorMessage } from '../lib/getErrorMessage'
 import Swal from 'sweetalert2'
 import { swalDangerTheme, swalTheme } from '../lib/swal'
+import NotFound from '../NotFound/NotFound'
 
 interface Application {
   id: string
@@ -198,7 +199,7 @@ const MyApplication = () => {
 
       {!isLoading && !error && applications.length === 0 && (
         <div className="text-center py-16 border border-dashed border-border rounded-lg">
-          <p className="text-muted mb-3">No applications found.</p>
+        <NotFound/>
           <Link
             to="/applications/new"
             className="text-accent font-semibold hover:underline"
