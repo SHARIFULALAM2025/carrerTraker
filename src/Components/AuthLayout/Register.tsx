@@ -133,8 +133,9 @@ const Register = () => {
               </span>
             )}
           </div>
+          {/* password */}
 
-          {/* Password Section */}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold text-foreground mb-1">
