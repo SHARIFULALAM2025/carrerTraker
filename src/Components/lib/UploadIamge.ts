@@ -2,12 +2,20 @@ import axios from 'axios'
 
 export const uploadImage = async (imageFile: File): Promise<string> => {
   const formData = new FormData()
-  formData.append('image', imageFile)
+
+  formData.append('file', imageFile)
+
+  formData.append(
+    'upload_preset',
+    import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+  )
+
+  const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 
   const { data } = await axios.post(
-    `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
     formData
   )
 
-  return data?.data?.url
+  return data.secure_url
 }

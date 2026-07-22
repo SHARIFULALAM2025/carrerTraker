@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import RootLayout from '../RootLayout/RootLayout'
 import Home from '../Home/Home'
-import dashboard from '../Dashboard/dashboard'
+
 
 import Error from '../ErrorPage/Error'
 import AddApplication from '../AddApplication/AddApplication'
@@ -12,6 +12,7 @@ import Register from '../AuthLayout/Register'
 import Login from '../AuthLayout/Login'
 import MyApplication from '../MyApplication/MyApplication'
 import AllApplication from '../AllApplication/AllApplication'
+import Dashboard from '../Dashboard/dashboard'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        Component: dashboard,
+        Component:Dashboard,
       },
       {
         path: '/myApplication',
