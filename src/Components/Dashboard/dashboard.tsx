@@ -6,6 +6,7 @@ import { useAuth } from '../lib/useAuth'
 import { apiClient } from '../../api/client'
 import Loading from '../Loader/Loading'
 import { getErrorMessage } from '../lib/getErrorMessage'
+import NotFound from '../NotFound/NotFound'
 
 interface Application {
   id: string
@@ -101,7 +102,7 @@ export default function Dashboard() {
 
           {data.recent.length === 0 ? (
             <div className="text-center py-16 border border-dashed border-border rounded-lg">
-              <p className="text-muted mb-3">No applications yet.</p>
+              <NotFound/>
               <Link to="/applications/new" className="text-accent font-semibold hover:underline">
                 Add your first application
               </Link>
