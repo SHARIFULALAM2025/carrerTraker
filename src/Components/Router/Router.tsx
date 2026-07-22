@@ -16,15 +16,15 @@ import AllApplication from '../AllApplication/AllApplication'
 const router = createBrowserRouter([
   {
     path: '/',
-    ErrorBoundary: Error,
     Component: RootLayout,
     children: [
       {
         index: true,
         Component: Home,
-      }, {
-        path: "/AllApplication",
-        Component:AllApplication
+      },
+      {
+        path: '/AllApplication',
+        Component: AllApplication,
       },
       {
         path: '/dashboard',
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/applications/:id/edit',
         Component: ApplicationEdit,
+      },
+      {
+        path: '*',
+        Component: Error,
       },
     ],
   },
